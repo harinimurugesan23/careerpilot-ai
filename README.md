@@ -4,6 +4,7 @@ A simple AI career assistant you can chat with about career guidance, skill
 gaps, interview prep, job descriptions, and learning roadmaps — built entirely
 on Cloudflare (Workers, Agents SDK, Workers AI, Durable Objects) with a React
 + TypeScript frontend.
+## https://careerpilot-ai.harinimurugesan23.workers.dev
 
 ## Overview
 
