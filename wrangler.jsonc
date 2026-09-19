@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "careerpilot-ai",
+  "main": "src/server.ts",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Serves the built React app (index.html, JS, CSS) as static assets.
+  // Any request not matched by the Worker's routing falls back to these.
+  "assets": {
+    "not_found_handling": "single-page-application"
+  },
+
+  // Workers AI binding -> lets the Worker call env.AI.run(...) to reach
+  // Llama 3.3 directly on Cloudflare's network. No API key needed.
+  "ai": {
+    "binding": "AI"
+  },
+
+  // Durable Object binding for the CareerAgent class. Each unique agent
+  // "name" (see src/App.tsx) gets its own persistent instance.
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CareerAgent",
+        "class_name": "CareerAgent"
+      }
+    ]
+  },
+
+  // Required the first time a Durable Object class is introduced.
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["CareerAgent"]
+    }
+  ]
+}
